@@ -13,6 +13,10 @@ const RestaurantCard = ({ cardList }) => {
       ></img>
       <h3>{cardList.name}</h3>
       <h4>{cardList.order}</h4>
+			<div className="nutrition">
+				<h6 className="fat">fat: {cardList.nutritions.fat}</h6>
+				<h6 className="sugar">sugar: {cardList.nutritions.sugar}</h6>
+			</div>
     </div>
   );
 };

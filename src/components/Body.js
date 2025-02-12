@@ -1,20 +1,33 @@
 import RestaurantCard from "./RestaurantCard";
-import { fruitList } from "../utils/mockData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
-  const [options, setOptions] = useState(fruitList);
+  const [options, setOptions] = useState([]);
+
   function sugarHighPick() {
     const filteredFruits = options.filter(
       (option) => option.nutritions.sugar > 10
     );
     setOptions(filteredFruits);
-    console.log(options);
+  }
+
+  const fetchFruits = async () => {
+    const data = await fetch("https://www.fruityvice.com/api/fruit/all");
+    const json = await data.json();
+    setOptions(json);
+  };
+
+  useEffect(() => {
+    fetchFruits();
+  }, []);
+
+  if (options.length === 0) {
+    return <Shimmer />;
   }
   return (
     <div className="body">
       <div className="filter">
-        {/* <button onClick={() => sugarHighPick()}>sugar high fruits</button> */}
         <button onClick={sugarHighPick}>sugar high fruits</button>
       </div>
       <div className="res-container">

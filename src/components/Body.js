@@ -22,10 +22,9 @@ const Body = () => {
     fetchFruits();
   }, []);
 
-  if (options.length === 0) {
-    return <Shimmer />;
-  }
-  return (
+  return options.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter">
         <button onClick={sugarHighPick}>sugar high fruits</button>

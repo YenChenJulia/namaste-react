@@ -63,3 +63,7 @@
   width: 50px;
   cursor: pointer;
 }
+
+.search {
+  display: flex;
+}

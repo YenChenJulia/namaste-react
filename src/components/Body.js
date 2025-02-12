@@ -4,6 +4,8 @@ import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [options, setOptions] = useState([]);
+  const [optionsAfterSearch, setOptionsAfterSearch] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   function sugarHighPick() {
     const filteredFruits = options.filter(
@@ -16,6 +18,7 @@ const Body = () => {
     const data = await fetch("https://www.fruityvice.com/api/fruit/all");
     const json = await data.json();
     setOptions(json);
+		setOptionsAfterSearch(json)
   };
 
   useEffect(() => {
@@ -27,10 +30,27 @@ const Body = () => {
   ) : (
     <div className="body">
       <div className="filter">
+        <div className="search">
+          <input
+            type="text"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          ></input>
+          <button
+            onClick={() => {
+              const searchResult = options.filter((option) =>
+                option.name.toLowerCase().includes(searchText.toLocaleLowerCase())
+              );
+              setOptionsAfterSearch(searchResult);
+            }}
+          >
+            Search
+          </button>
+        </div>
         <button onClick={sugarHighPick}>sugar high fruits</button>
       </div>
       <div className="res-container">
-        {options.map((item) => (
+        {optionsAfterSearch.map((item) => (
           <RestaurantCard key={item.id} cardList={item} />
         ))}
       </div>

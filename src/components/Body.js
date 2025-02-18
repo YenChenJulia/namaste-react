@@ -1,5 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
 
 const Body = () => {
@@ -18,7 +19,7 @@ const Body = () => {
     const data = await fetch("https://www.fruityvice.com/api/fruit/all");
     const json = await data.json();
     setOptions(json);
-		setOptionsAfterSearch(json)
+    setOptionsAfterSearch(json);
   };
 
   useEffect(() => {
@@ -39,7 +40,9 @@ const Body = () => {
           <button
             onClick={() => {
               const searchResult = options.filter((option) =>
-                option.name.toLowerCase().includes(searchText.toLocaleLowerCase())
+                option.name
+                  .toLowerCase()
+                  .includes(searchText.toLocaleLowerCase())
               );
               setOptionsAfterSearch(searchResult);
             }}
@@ -51,7 +54,9 @@ const Body = () => {
       </div>
       <div className="res-container">
         {optionsAfterSearch.map((item) => (
-          <RestaurantCard key={item.id} cardList={item} />
+          <Link to={"/restaurant/"+item.id} key={item.id}>
+            <RestaurantCard cardList={item} />
+          </Link>
         ))}
       </div>
     </div>

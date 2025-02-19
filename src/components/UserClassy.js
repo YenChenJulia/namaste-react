@@ -8,15 +8,18 @@ class UserClassy extends React.Component {
       count: 0,
       count2: 2,
     };
+    console.log(this.props.name + "constructor");
+     
   }
 
   componentDidMount () {
-    // this Component is used to make an api called.
-    // is like useEffect in function React.
+    console.log(this.props.name + "component did mount");
+
   }
-  // life cycle: create a constructor -> render -> componentDidMount
   render() {
     const { count, count2 } = this.state;
+    console.log(this.props.name + "rendered");
+    
     return (
       <div className="user-card">
         <h1>name: {this.props.name}</h1>

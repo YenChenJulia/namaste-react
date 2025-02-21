@@ -1,5 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
+import useOnlineStatus from "../utils/useOnlineStatus";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
 
@@ -25,6 +26,11 @@ const Body = () => {
   useEffect(() => {
     fetchFruits();
   }, []);
+
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false) {
+    return <h1> oops!! it seems you are offline!!!</h1>;
+  }
 
   return options.length === 0 ? (
     <Shimmer />
@@ -54,7 +60,7 @@ const Body = () => {
       </div>
       <div className="res-container">
         {optionsAfterSearch.map((item) => (
-          <Link to={"/restaurant/"+item.id} key={item.id}>
+          <Link to={"/restaurant/" + item.id} key={item.id}>
             <RestaurantCard cardList={item} />
           </Link>
         ))}

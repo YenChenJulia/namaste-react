@@ -39,11 +39,13 @@ const Body = () => {
       <div className="filter">
         <div className="search">
           <input
+            className="border rounded-sm"
             type="text"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           ></input>
           <button
+          className="bg-gray-50 border rounded-sm px-1"
             onClick={() => {
               const searchResult = options.filter((option) =>
                 option.name
@@ -58,7 +60,7 @@ const Body = () => {
         </div>
         <button onClick={sugarHighPick}>sugar high fruits</button>
       </div>
-      <div className="res-container">
+      <div className="res-container flex flex-wrap">
         {optionsAfterSearch.map((item) => (
           <Link to={"/restaurant/" + item.id} key={item.id}>
             <RestaurantCard cardList={item} />

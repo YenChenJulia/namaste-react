@@ -7,13 +7,15 @@ const Header = () => {
   const [btnContext, setBtnContext] = useState("login");
   const onlineStatus = useOnlineStatus();
   return (
-    <header className="header">
+    <header className="header flex justify-between items-center bg-amber-100">
       <div className="logo-container">
-        <img className="logo" src={IMG_URL} alt="logo img"></img>
+        <img className="logo w-35" src={IMG_URL} alt="logo img"></img>
       </div>
       <div className="nav-items">
-        <ul>
-          <li>{onlineStatus === true ? "online" : "offline"}</li>
+        <ul className="flex gap-2 p-2">
+          <li className="text-amber-500">
+            {onlineStatus === true ? "online" : "offline"}
+          </li>
           <li>
             <Link to={"/"}>Home</Link>
           </li>

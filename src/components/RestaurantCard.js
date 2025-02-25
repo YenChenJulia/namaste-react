@@ -1,8 +1,6 @@
 const RestaurantCard = ({ cardList }) => {
   return (
-    <div
-      className="bg-gray-300"
-    >
+    <div className="bg-gray-300">
       <img
         className="w-52 m-3"
         alt="res-logo"
@@ -10,12 +8,22 @@ const RestaurantCard = ({ cardList }) => {
       ></img>
       <h3 className="font-bold">{cardList.name}</h3>
       <h4>{cardList.order}</h4>
-			<div className="nutrition">
-				<h6 className="fat">fat: {cardList.nutritions.fat}</h6>
-				<h6 className="sugar">sugar: {cardList.nutritions.sugar}</h6>
-			</div>
+      <div className="nutrition">
+        <h6 className="fat">fat: {cardList.nutritions.fat}</h6>
+        <h6 className="sugar">sugar: {cardList.nutritions.sugar}</h6>
+      </div>
     </div>
   );
 };
 
+export const withoutFat = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div>
+        <label className="absolute bg-black text-white mx-1 p-1">No fat</label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
+};
 export default RestaurantCard;

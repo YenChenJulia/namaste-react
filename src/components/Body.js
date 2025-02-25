@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withoutFat } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { Link } from "react-router-dom";
@@ -8,6 +8,8 @@ const Body = () => {
   const [options, setOptions] = useState([]);
   const [optionsAfterSearch, setOptionsAfterSearch] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  const NoFatRestaurantCard = withoutFat(RestaurantCard);
 
   function sugarHighPick() {
     const filteredFruits = options.filter(
@@ -45,7 +47,7 @@ const Body = () => {
             onChange={(e) => setSearchText(e.target.value)}
           ></input>
           <button
-          className="bg-gray-50 border rounded-sm px-1"
+            className="bg-gray-50 border rounded-sm px-1"
             onClick={() => {
               const searchResult = options.filter((option) =>
                 option.name
@@ -63,7 +65,11 @@ const Body = () => {
       <div className="res-container flex flex-wrap">
         {optionsAfterSearch.map((item) => (
           <Link to={"/restaurant/" + item.id} key={item.id}>
-            <RestaurantCard cardList={item} />
+            {item.nutritions.fat === 0 ? (
+              <NoFatRestaurantCard cardList={item} />
+            ) : (
+              <RestaurantCard cardList={item} />
+            )}
           </Link>
         ))}
       </div>

@@ -8,17 +8,17 @@ class UserClassy extends React.Component {
       count: 0,
       count2: 2,
     };
-    console.log(this.props.name + "constructor");
+    // console.log(this.props.name + "constructor");
      
   }
 
   componentDidMount () {
-    console.log(this.props.name + "component did mount");
+    // console.log(this.props.name + "component did mount");
 
   }
   render() {
     const { count, count2 } = this.state;
-    console.log(this.props.name + "rendered");
+    // console.log(this.props.name + "rendered");
     
     return (
       <div className="user-card">

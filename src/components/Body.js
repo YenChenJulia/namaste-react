@@ -1,13 +1,15 @@
 import RestaurantCard, { withoutFat } from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
+import userContext from "../utils/userContext";
 
 const Body = () => {
   const [options, setOptions] = useState([]);
   const [optionsAfterSearch, setOptionsAfterSearch] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const { loggedInUser, setUserName } = useContext(userContext);
 
   const NoFatRestaurantCard = withoutFat(RestaurantCard);
 
@@ -61,6 +63,14 @@ const Body = () => {
           </button>
         </div>
         <button onClick={sugarHighPick}>sugar high fruits</button>
+        <div>
+          <label>User Name: </label>
+          <input
+            className="border px-2"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          ></input>
+        </div>
       </div>
       <div className="res-container flex flex-wrap">
         {optionsAfterSearch.map((item) => (

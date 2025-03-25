@@ -4,6 +4,8 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import userContext from "../utils/userContext";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../utils/cartSlice";
 
 const Body = () => {
   const [options, setOptions] = useState([]);
@@ -12,6 +14,10 @@ const Body = () => {
   const { loggedInUser, setUserName } = useContext(userContext);
 
   const NoFatRestaurantCard = withoutFat(RestaurantCard);
+  const dispatch = useDispatch();
+  const handleClearCart = () => {
+    dispatch(clearCart())
+  };
 
   function sugarHighPick() {
     const filteredFruits = options.filter(
@@ -71,6 +77,14 @@ const Body = () => {
             onChange={(e) => setUserName(e.target.value)}
           ></input>
         </div>
+      </div>
+      <div>
+        <button
+          className="text-lg font-bold border bg-amber-600 cursor-pointer"
+          onClick={() => handleClearCart()}
+        >
+          clear cart
+        </button>
       </div>
       <div className="res-container flex flex-wrap">
         {optionsAfterSearch.map((item) => (

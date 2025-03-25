@@ -1,4 +1,12 @@
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
+
 const RestaurantCard = ({ cardList }) => {
+  const dispatch = useDispatch();
+  const handleAddItem = (item) => {
+    dispatch(addItem(item));
+  };
+
   return (
     <div className="bg-gray-300">
       <img
@@ -8,6 +16,12 @@ const RestaurantCard = ({ cardList }) => {
       ></img>
       <h3 className="font-bold">{cardList.name}</h3>
       <h4>{cardList.order}</h4>
+      <button
+        className="text-lg font-bold border rounded bg-amber-200 px-2"
+        onClick={() => handleAddItem(cardList.name)}
+      >
+        add
+      </button>
       <div className="nutrition">
         <h6 className="fat">fat: {cardList.nutritions.fat}</h6>
         <h6 className="sugar">sugar: {cardList.nutritions.sugar}</h6>

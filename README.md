@@ -37,3 +37,4 @@
 - Install Babel dependencies
 - Configure Babel
 - Configure Parcel Config file to disable Babel transpilation
+- Jest Configuration
